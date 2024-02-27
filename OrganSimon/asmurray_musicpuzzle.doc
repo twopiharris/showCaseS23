@@ -1,0 +1,69 @@
+Intro
+ show title
+ instructions
+ everything else hidden
+Game
+ title hidden
+ btnNew hidden
+ btnQuit hidden
+ btnKeys shown
+ Sprites shown
+ btnResetCode shown
+ input shown
+ btnCheck shown
+ lblAttempts shown
+Pause
+ title hidden
+ sprites hidden
+ btnKeys hidden
+ input hidden
+ btnCheck hidden
+ lblAttempts hidden
+ btnQuit shown
+ btnNew shown
+ Clues shown
+Quit
+ end game
+
+Sprites
+ keyboard keys
+   plays sounds associated with key when clicked
+   adds note to the input
+ 
+UI elements
+ background
+   something musical? Goonies?
+   not disruptive to piano
+Title
+ list instructions
+ click start game to start
+btnKeys
+ button for each key in keyboard
+lblInput
+ Shows the notes played by the player
+btnClear
+ Clears out the input
+btnCheck
+ Checks the input to the solution
+ subtracts from the attempts if wrong
+lblAttempts
+ shows the remaining attempts the player has
+btnReset
+ resets the game
+ creates a new solution for puzzle
+btnQuit
+ closes the game
+
+sound
+ keys
+  tones for each note
+ solution
+  play a song for each solution when found
+ failed attempt
+  play a sound for a failed attempt
+ lose
+  sad song when fail all solutions
+
+
+
+simon
