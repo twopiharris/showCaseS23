@@ -27,20 +27,6 @@ class UserInterface(simpleGE.Scene):
         self.logo.setPosition((320,200))
         self.logo.setSize(300,300)
 
-        #Start Button
-        self.startButton = simpleGE.Button()
-        self.startButton.fgColor = (0,0,0)
-        self.startButton.bgColor = (225,225,0)
-        self.startButton.center = (320,375)
-        self.startButton.text = "START"
-
-        #Fight button that will start fight sequence
-        self.fightButton = simpleGE.Button()
-        self.fightButton.fgColor = (0,0,0)
-        self.fightButton.bgColor = (225,225,0)
-        self.fightButton.center = (320,70)
-        self.fightButton.text = "FIGHT"
-        self.fightButton.hide()
 
         #Knight Headshot
         self.knightHeadshot = simpleGE.SuperSprite(self)
@@ -48,8 +34,7 @@ class UserInterface(simpleGE.Scene):
         self.knightHeadshot.setSize(75,75)
         self.knightHeadshot.setPosition((50,400))
         self.knightHeadshot.hide()
-
-        self.knightHotSpot = HotSpot(self,50,400,"knight")
+        
 
         #Minotuar HeadShot
         self.minotaurHeadshot = simpleGE.SuperSprite(self)
@@ -58,7 +43,6 @@ class UserInterface(simpleGE.Scene):
         self.minotaurHeadshot.setPosition((590,400))
         self.minotaurHeadshot.hide()
 
-        self.minotaurHotSpot = HotSpot(self,590,400,"minotaur")
 
         #Talos Headshot
         self.talosHeadshot = simpleGE.SuperSprite(self)
@@ -67,24 +51,15 @@ class UserInterface(simpleGE.Scene):
         self.talosHeadshot.setPosition((320,400))
         self.talosHeadshot.hide()
 
-        self.talosHotSpot = HotSpot(self,320,400,"talos")
-        self.talosHotSpot.hide()
 
-        #P1 control label
+        #Control label
         self.P1control = simpleGE.MultiLabel()
-        self.P1control.textLines = ["Player 1 Controls: Hit- W KEY, Block- Q KEY, Left Walk- A KEY", 
-                                    "Right Walk- D KEY, Jump- S KEY, Special- E"]
-        self.P1control.size = (600,80)
+        self.P1control.textLines = ["Player Controls: Hit- Red, Block- White, LT Walk- Stick LT", 
+                                    "RT Walk- Stick RT, Jump- Stick Up, Special- Yellow",
+                                    "Player 1 Left Controls, Player 2 Right Controls.", "Use joystick and red key to select character" ]
+        self.P1control.size = (620,150)
         self.P1control.bgColor = ("orange")
         self.P1control.hide()
-
-        #P2 control label
-        self.P2control = simpleGE.MultiLabel()
-        self.P2control.textLines = ["Player 2 Controls: Hit- I KEY, Block- O KEY, Left Walk- J KEY", 
-                                    "Right Walk- L KEY, Jump- K KEY, Special- U"]
-        self.P2control.size = (600,80)
-        self.P2control.bgColor = ("orange")
-        self.P2control.hide()
 
         #Sounds
         self.player1Sound = simpleGE.Sound("UI/player_1.wav")
@@ -99,135 +74,200 @@ class UserInterface(simpleGE.Scene):
         pygame.mixer.music.set_volume(.3)
         pygame.mixer.music.play(-1)
 
+        #Red Border
+        self.redBorder = simpleGE.SuperSprite(self)
+        self.redBorder.imageMaster = pygame.image.load("UI/redBorder.png")
+        self.redBorder.setSize(90,90)
+        self.redBorder.setPosition((320,400))
+        self.redBorder.hide()
+
+        #Creates the pop up that tells what button to click when ready to play
+        self.startLabel = simpleGE.Label()
+        self.startLabel.text = "Player 1 Click Red To Begin!"
+        self.startLabel.center = (320,375)
+        self.startLabel.bgColor = (0,0,0)
+        self.startLabel.size = (620,70)
+        self.startLabel.font = pygame.font.Font("UI/ARCADE_N copy.TTF",20)
+        self.startLabel.fgColor = (255,215,0)
+
         #Variables that will contain the selections
         self.player1 = ""
         self.player2 = ""
+        
+        #Keeps track of where the user is selecting and variable for if you're on the start screen
+        self.selectionNumber = 0
+        self.startScreen = True
 
-        self.sprites = [self.fightButton,self.knightHeadshot,self.knightHotSpot,self.minotaurHeadshot,
-                        self.minotaurHotSpot,self.logo,self.startButton,self.P1control,self.P2control,
-                        self.talosHeadshot,self.talosHotSpot]
+        self.sprites = [self.knightHeadshot,self.minotaurHeadshot,self.logo,self.P1control,self.talosHeadshot,self.redBorder,self.startLabel]
 
 
     #Checks that both characters have selected a character and ready to fight
     def update(self):
 
-        if self.startButton.clicked:
+        if self.isKeyPressed(pygame.K_f) and self.startScreen == True:
 
             self.logo.hide()
-            self.startButton.hide()
-            self.fightButton.show((320,70))
             self.knightHeadshot.show()
             self.minotaurHeadshot.show()
             self.talosHeadshot.show()
-            self.talosHotSpot.show()
-            self.P1control.show((320,150))
-            self.P2control.show((320,250))
+            self.P1control.show((320,180))
+            self.startLabel.hide()
+            self.startScreen = False
 
             self.player1Sound.play()
             time.sleep(1)
             self.chooseCharacter.play()
 
-        if self.fightButton.clicked:
 
-            if self.selectionTurn == 3:
-                pygame.mixer.music.stop()
-                self.stop()
-                
-
-
-#Class that creates hotspots to be clicked on
-class HotSpot(simpleGE.BasicSprite):
+        if self.selectionTurn == 3 and self.isKeyPressed(pygame.K_f):
+            pygame.mixer.music.stop()
+            self.stop()
     
-    def __init__(self, scene,x,y,character):
-        super().__init__(scene)
-        self.image = pygame.Surface((75, 75), pygame.SRCALPHA)
-        self.image.fill(pygame.Color(0,0,0,0))
-        self.rect = self.image.get_rect()
-        self.active = False
-        self.clicked = False
-        self.transparent = False
-        self.x = x
-        self.y = y
-        self.hitTimes = 0
-        self.character = character
+        if self.selectionTurn == 1:
+            if self.isKeyPressed(pygame.K_d):
+                
+                if self.selectionNumber == 4:
+                    self.selectionNumber = 1
+                    time.sleep(0.2)
+
+                else:
+                    self.selectionNumber += 1
+                    time.sleep(0.2)
+
+            if self.isKeyPressed(pygame.K_a):
+                if self.selectionNumber == 1:
+                    self.selectionNumber = 3
+                    time.sleep(0.2)
+
+                else:
+                    self.selectionNumber -=1
+                    time.sleep(0.2)
         
-    def checkEvents(self):
+        if self.selectionTurn == 2:
 
-        #check for clicked and active                
-        self.clicked = False
+            if self.isKeyPressed(pygame.K_l):
+                
+                if self.selectionNumber == 4:
+                    self.selectionNumber = 1
+                    time.sleep(0.2)
+                    
 
-        #check for mouse input
-        if pygame.mouse.get_pressed() == (1, 0, 0):
+                else:
+                    self.selectionNumber += 1
+                    time.sleep(0.2)
+
+            if self.isKeyPressed(pygame.K_j):
+
+                if self.selectionNumber == 1:
+                    self.selectionNumber = 3
+                    time.sleep(0.2)
+
+                else:
+                    self.selectionNumber -=1
+                    time.sleep(0.2)
             
-            if self.rect.collidepoint(pygame.mouse.get_pos()):
-               
-                #Selection for the knight character
-                if (self.scene.selectionTurn == 1) and self.character == "knight":
-                    self.scene.selectSound.play()
-                    self.scene.knightHeadshot.imageMaster = pygame.image.load("Knight/knight_headshotSelected.png")
-                    self.scene.knightHeadshot.setSize(75,75)
-                    self.scene.selectionTurn += 1 
-                    self.scene.player1 = "knight"
-                    self.scene.player2Sound.play()
+        if self.selectionNumber == 1:
+            self.redBorder.setPosition((self.knightHeadshot.x,self.knightHeadshot.y))
+        
+        elif self.selectionNumber == 2:
+            self.redBorder.setPosition((self.talosHeadshot.x,self.talosHeadshot.y))
+
+        elif self.selectionNumber == 3:
+            self.redBorder.setPosition((self.minotaurHeadshot.x,self.minotaurHeadshot.y))
+        
+        elif self.selectionNumber == 4:
+            self.selectionNumber = 1
+        
+        elif self.selectionNumber == -1:
+            self.selectionNumber = 3
+
+        
+        if self.isKeyPressed(pygame.K_f):
+
+            #Selection for the knight character
+                if (self.selectionTurn == 1) and self.selectionNumber == 1:
+                    self.selectSound.play()
+                    self.knightHeadshot.imageMaster = pygame.image.load("Knight/knight_headshotSelected.png")
+                    self.knightHeadshot.setSize(75,75)
+                    self.selectionTurn += 1 
+                    self.player1 = "knight"
+                    self.player2Sound.play()
                     time.sleep(1)
-                    self.scene.chooseCharacter.play()
-                    self.hide()
-                    
-                elif (self.scene.selectionTurn == 2) and self.character == "knight":
-                    self.scene.selectSound.play()
-                    self.scene.knightHeadshot.imageMaster = pygame.image.load("Knight/knight_headshotSelected.png")
-                    self.scene.knightHeadshot.setSize(75,75)
-                    self.scene.selectionTurn += 1 
-                    self.scene.player2 = "knight"
-                    self.hide()
-                    
+                    self.chooseCharacter.play()
+                    self.redBorder.hide()
+                    self.selectionNumber = 0
+
+
                 #Minotaur selection
-                if (self.scene.selectionTurn == 1) and self.character == "minotaur":
-                    self.scene.selectSound.play()
-                    self.scene.minotaurHeadshot.imageMaster = pygame.image.load("Minotaur/minotaur_headshotSelected.png")
-                    self.scene.minotaurHeadshot.setSize(75,75)
-                    self.scene.selectionTurn += 1 
-                    self.scene.player1 = "minotaur"
-                    self.scene.player2Sound.play()
+                if (self.selectionTurn == 1) and self.selectionNumber == 3:
+                    self.selectSound.play()
+                    self.minotaurHeadshot.imageMaster = pygame.image.load("Minotaur/minotaur_headshotSelected.png")
+                    self.minotaurHeadshot.setSize(75,75)
+                    self.selectionTurn += 1 
+                    self.player1 = "minotaur"
+                    self.player2Sound.play()
                     time.sleep(1)
-                    self.scene.chooseCharacter.play()
-                    self.hide()
+                    self.chooseCharacter.play()
+                    self.redBorder.hide()
+                    self.selectionNumber = 0
                     
-                elif (self.scene.selectionTurn == 2) and self.character == "minotaur":
-                    self.scene.selectSound.play()
-                    self.scene.minotaurHeadshot.imageMaster = pygame.image.load("Minotaur/minotaur_headshotSelected.png")
-                    self.scene.minotaurHeadshot.setSize(75,75)
-                    self.scene.selectionTurn += 1 
-                    self.scene.player2 = "minotaur"
-                    self.hide()
                 
                 #Talos Selection
-                if (self.scene.selectionTurn == 1) and self.character == "talos":
-                    self.scene.selectSound.play()
-                    self.scene.talosHeadshot.imageMaster = pygame.image.load("Talos/talos_headshotSelected.png")
-                    self.scene.talosHeadshot.setSize(75,75)
-                    self.scene.selectionTurn += 1 
-                    self.scene.player1 = "talos"
-                    self.scene.player2Sound.play()
+                if (self.selectionTurn == 1) and self.selectionNumber == 2:
+                    self.selectSound.play()
+                    self.talosHeadshot.imageMaster = pygame.image.load("Talos/talos_headshotSelected.png")
+                    self.talosHeadshot.setSize(75,75)
+                    self.selectionTurn += 1 
+                    self.player1 = "talos"
+                    self.player2Sound.play()
                     time.sleep(1)
-                    self.scene.chooseCharacter.play()
-                    self.hide()
-                    
-                elif (self.scene.selectionTurn == 2) and self.character == "talos":
-                    self.scene.selectSound.play()
-                    self.scene.talosHeadshot.imageMaster = pygame.image.load("Talos/talos_headshotSelected.png")
-                    self.scene.talosHeadshot.setSize(75,75)
-                    self.scene.selectionTurn += 1 
-                    self.scene.player2 = "talos"
-                    self.hide()
+                    self.chooseCharacter.play()
+                    self.redBorder.hide()
+                    self.selectionNumber = 0
+        
+
+        #Code for player 2 selection
+        if self.isKeyPressed(pygame.K_h):
+
+            if (self.selectionTurn == 2) and (self.selectionNumber == 1) and (self.player1 != "knight") :
+                self.selectSound.play()
+                self.knightHeadshot.imageMaster = pygame.image.load("Knight/knight_headshotSelected.png")
+                self.knightHeadshot.setSize(75,75)
+                self.selectionTurn += 1 
+                self.player2 = "knight"
+                self.redBorder.hide()
+                self.selectionNumber = 0
+                self.startLabel.show((320,70))
+                self.startLabel.text = "Player 1: Click Red to Fight!"
+            
+            if (self.selectionTurn == 2) and (self.selectionNumber == 3) and (self.player1 != "minotaur"):
+                self.selectSound.play()
+                self.minotaurHeadshot.imageMaster = pygame.image.load("Minotaur/minotaur_headshotSelected.png")
+                self.minotaurHeadshot.setSize(75,75)
+                self.selectionTurn += 1 
+                self.player2 = "minotaur"
+                self.redBorder.hide()
+                self.selectionNumber = 0
+                self.startLabel.show((320,70))
+                self.startLabel.text = "Player 1: Click Red to Fight!"
+            
+            if (self.selectionTurn == 2) and (self.selectionNumber == 2) and (self.player1 != "talos"):
+
+                self.selectSound.play()
+                self.talosHeadshot.imageMaster = pygame.image.load("Talos/talos_headshotSelected.png")
+                self.talosHeadshot.setSize(75,75)
+                self.selectionTurn += 1 
+                self.player2 = "talos"
+                self.redBorder.hide()
+                self.selectionNumber = 0
+                self.startLabel.show((320,70))
+                self.startLabel.text = "Player 1: Click Red to Fight!"
+            
+
+            
 
 
-        #check for mouse release
-        if self.active == True:
-            if pygame.mouse.get_pressed() == (0, 0, 0):
-                self.active = False
-                if self.rect.collidepoint(pygame.mouse.get_pos()):
-                    self.clicked = True
+
 
 
 #Main function that declares the scene
