@@ -143,6 +143,7 @@ class UserInterface(simpleGE.Scene):
                     self.selectionNumber -=1
                     time.sleep(0.2)
         
+        #Code that allows the user to toggle.
         if self.selectionTurn == 2:
 
             if self.isKeyPressed(pygame.K_l):
@@ -181,7 +182,8 @@ class UserInterface(simpleGE.Scene):
         elif self.selectionNumber == -1:
             self.selectionNumber = 3
 
-        
+
+        #Player 1 selection
         if self.isKeyPressed(pygame.K_f):
 
             #Selection for the knight character
@@ -263,10 +265,6 @@ class UserInterface(simpleGE.Scene):
                 self.startLabel.show((320,70))
                 self.startLabel.text = "Player 1: Click Red to Fight!"
             
-
-            
-
-
 
 
 
