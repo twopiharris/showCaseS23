@@ -21,6 +21,7 @@ Player 1 and 2 Wins: Image created by me
 Character Headshots: Image created by me
 Minotaur Authors: Authors: bluecarrot16, Benjamin K. Smith (BenCreating), Evert, Eliza Wyatt (ElizaWy), TheraHedwig, MuffinElZangano, Durrani, Johannes Sj?lund (wulax), Stephen Challener (Redshrike), Nila122, Daniel Eddeland (daneeklu), David Conway Jr. (JaidynReiman), Johannes Sjölund (wulax), Matthew Krohn (makrohn), Joe White, Pierre Vigier and DCSS artists (see https://github.com/crawl/tiles/blob/master/ARTISTS.md)
 Knight Authors: Authors: bluecarrot16, Benjamin K. Smith (BenCreating), Evert, Eliza Wyatt (ElizaWy), TheraHedwig, MuffinElZangano, Durrani, Johannes Sj?lund (wulax), Stephen Challener (Redshrike), Manuel Riecke (MrBeast), Michael Whitlock (bigbeargames), Matthew Krohn (makrohn), Johannes Sjölund (wulax), Nila122
+Red Border Source: https://en.picmix.com/stamp/Red-Frame-1845020#google_vignette
 
 Nolan Meyer
 
@@ -159,20 +160,6 @@ class Game(simpleGE.Scene):
         self.P1comboTimes = random.randint(5,20)
         self.P2comboTimes = random.randint(5,20)
 
-        #Play again with same character SC-Same characters
-        self.playAgainSCButton = simpleGE.Button()
-        self.playAgainSCButton.fgColor = (0,0,0)
-        self.playAgainSCButton.bgColor = (225,225,0)
-        self.playAgainSCButton.text = "Restart"
-        self.playAgainSCButton.hide()
-
-        #Quit button
-        self.quitButton = simpleGE.Button()
-        self.quitButton.fgColor = (0,0,0)
-        self.quitButton.bgColor = (225,225,0)
-        self.quitButton.text = "Quit"
-        self.quitButton.hide()
-
         #Kapow Image
         self.kapow = simpleGE.SuperSprite(self)
         self.kapow.imageMaster = pygame.image.load("UI/kapow.png")
@@ -214,6 +201,28 @@ class Game(simpleGE.Scene):
         pygame.mixer.music.set_volume(.3)
         pygame.mixer.music.play(-1)
 
+        #Play again label
+        self.playAgainLabel = simpleGE.Label()
+        self.playAgainLabel.text = "P1 Click Blue To Play Again!"
+        self.playAgainLabel.center = (320,375)
+        self.playAgainLabel.fgColor = (225,225,0)
+        self.playAgainLabel.bgColor = (0,0,0)
+        self.playAgainLabel.size = (700,70)
+        self.playAgainLabel.font = pygame.font.Font("UI/ARCADE_N copy.TTF",20)
+        self.playAgainLabel.fgColor = (255,215,0)
+        self.playAgainLabel.hide()
+
+        #Quit label
+        self.quitLabel = simpleGE.Label()
+        self.quitLabel.text = "P1 Click Green To Quit!"
+        self.quitLabel.center = (320,375)
+        self.quitLabel.fgColor = (225,225,0)
+        self.quitLabel.bgColor = (0,0,0)
+        self.quitLabel.size = (700,70)
+        self.quitLabel.font = pygame.font.Font("UI/ARCADE_N copy.TTF",20)
+        self.quitLabel.fgColor = (255,215,0)
+        self.quitLabel.hide()
+
         #This variable will be used to see how many times the loop is run. When it is equal to two it will start the countdown sequence.
         self.runTimes = 0
 
@@ -221,9 +230,8 @@ class Game(simpleGE.Scene):
         self.sprites = [self.player1HealthBarO,self.player1HealthBarU,self.player1HealthBar,
                         self.player1Text,self.player2HealthBarO,self.player2HealthBarU,
                         self.player2HealthBar,self.player2Text,self.player1,self.p1HitboxGroup,
-                        self.player2,self.p2HitboxGroup,self.player1Wins,self.playAgainSCButton,
-                        self.quitButton,self.player2Wins,self.kapow,self.three_image,self.two_image,
-                        self.one_image,self.begin_image,self.fireBullets,self.fireBulletsHB]
+                        self.player2,self.p2HitboxGroup,self.player1Wins,self.player2Wins,self.kapow,self.three_image,self.two_image,
+                        self.one_image,self.begin_image,self.fireBullets,self.fireBulletsHB,self.playAgainLabel,self.quitLabel]
         
 
     #Update method controls the game
@@ -232,11 +240,11 @@ class Game(simpleGE.Scene):
         self.checkCollision()
         self.countdown()
 
-        if self.playAgainSCButton.clicked:
+        if self.isKeyPressed(pygame.K_q) and (self.player1.health <= 0 or self.player2.health <= 0):
 
             self.reset()
         
-        if self.quitButton.clicked:
+        if self.isKeyPressed(pygame.K_x) and (self.player1.health <= 0 or self.player2.health <= 0):
 
             self.stop()
 
@@ -313,8 +321,8 @@ class Game(simpleGE.Scene):
                 self.player2Wins.show()
                 self.player2Wins.x = 315
                 self.player2Wins.y = 200
-                self.playAgainSCButton.show((300,375))
-                self.quitButton.show((300,420))
+                self.playAgainLabel.show((300,375))
+                self.quitLabel.show((300,420))
                 pygame.mixer.music.stop()
                 time.sleep(1)
                 self.player2Sound.play()
@@ -331,8 +339,8 @@ class Game(simpleGE.Scene):
                 self.player1Wins.show()
                 self.player1Wins.x = 315
                 self.player1Wins.y = 200
-                self.playAgainSCButton.show((300,375))
-                self.quitButton.show((300,420))
+                self.playAgainLabel.show((300,375))
+                self.quitLabel.show((300,420))
                 pygame.mixer.music.stop()
                 time.sleep(1)
                 self.player1Sound.play()
@@ -348,14 +356,14 @@ class Game(simpleGE.Scene):
         self.player2.setPosition((590,400))
         self.player1.lastKey = "d"
         self.player2.lastKey = "j"
-        self.playAgainSCButton.hide()
         self.player1Wins.hide()
         self.player2Wins.hide()
         self.kapow.hide()
+        self.playAgainLabel.hide()
+        self.quitLabel.hide()
         self.playTimes = 0
         self.player1HealthBar.reset(self.player1)
         self.player2HealthBar.reset(self.player2)
-        self.quitButton.hide()
         self.runTimes = 0
         self.P1hitTimes = 0
         self.P2hitTimes = 0
@@ -670,20 +678,20 @@ class Knight(simpleGE.SuperSprite):
                     if self.imageNum == 9:
                         self.imageNum = 2
                 
-                if self.scene.isKeyPressed(pygame.K_w):
+                if self.scene.isKeyPressed(pygame.K_f):
                     
                     if self.hitMotion == False:
                         self.hitMotion = True
                         self.sound.play()
                 
-                if self.scene.isKeyPressed(pygame.K_s):
+                if self.scene.isKeyPressed(pygame.K_w):
                     
                     if self.jumpMotion == False:
                         self.jumpMotion = True
                         self.addForce(4,90)
                         self.y += 10
                 
-                if self.scene.isKeyPressed(pygame.K_q):
+                if self.scene.isKeyPressed(pygame.K_e):
                     
                     if not(self.scene.isKeyPressed(pygame.K_d) or (self.scene.isKeyPressed(pygame.K_a))):
                         self.block = True
@@ -727,20 +735,20 @@ class Knight(simpleGE.SuperSprite):
                     if self.imageNum == 9:
                         self.imageNum = 1
                 
-                if self.scene.isKeyPressed(pygame.K_i):
+                if self.scene.isKeyPressed(pygame.K_h):
                     
                     if self.hitMotion == False:
                         self.hitMotion = True
                         self.sound.play()
                 
-                if self.scene.isKeyPressed(pygame.K_k):
+                if self.scene.isKeyPressed(pygame.K_i):
                 
                     if self.jumpMotion == False:
                         self.jumpMotion = True
                         self.addForce(4,90)
                         self.y += 10
                 
-                if self.scene.isKeyPressed(pygame.K_o):
+                if self.scene.isKeyPressed(pygame.K_u):
                     
                     if not(self.scene.isKeyPressed(pygame.K_j) or (self.scene.isKeyPressed(pygame.K_l))):
                         self.block = True
@@ -1112,20 +1120,20 @@ class Talos(Knight):
                     if self.imageNum == 9:
                         self.imageNum = 2
                 
-                if self.scene.isKeyPressed(pygame.K_w):
+                if self.scene.isKeyPressed(pygame.K_f):
                     
                     if self.hitMotion == False:
                         self.hitMotion = True
                         self.sound.play()
                 
-                if self.scene.isKeyPressed(pygame.K_s):
+                if self.scene.isKeyPressed(pygame.K_w):
                     
                     if self.jumpMotion == False:
                         self.jumpMotion = True
                         self.addForce(4,90)
                         self.y += 10
                 
-                if self.scene.isKeyPressed(pygame.K_q):
+                if self.scene.isKeyPressed(pygame.K_e):
                     
                     if not(self.scene.isKeyPressed(pygame.K_d) or (self.scene.isKeyPressed(pygame.K_a))):
                         self.block = True
@@ -1136,7 +1144,7 @@ class Talos(Knight):
                         if self.lastKey == "a":
                             self.imageMaster = self.leftImages["leftBlock"]
                 
-                if self.scene.isKeyPressed(pygame.K_e):
+                if self.scene.isKeyPressed(pygame.K_z):
 
                     if not(self.scene.isKeyPressed(pygame.K_d) or (self.scene.isKeyPressed(pygame.K_a))):
 
@@ -1181,20 +1189,20 @@ class Talos(Knight):
                     if self.imageNum == 9:
                         self.imageNum = 1
                 
-                if self.scene.isKeyPressed(pygame.K_i):
+                if self.scene.isKeyPressed(pygame.K_h):
                     
                     if self.hitMotion == False:
                         self.hitMotion = True
                         self.sound.play()
                 
-                if self.scene.isKeyPressed(pygame.K_k):
+                if self.scene.isKeyPressed(pygame.K_i):
                 
                     if self.jumpMotion == False:
                         self.jumpMotion = True
                         self.addForce(4,90)
                         self.y += 10
                 
-                if self.scene.isKeyPressed(pygame.K_o):
+                if self.scene.isKeyPressed(pygame.K_u):
                     
                     if not(self.scene.isKeyPressed(pygame.K_j) or (self.scene.isKeyPressed(pygame.K_l))):
                         self.block = True
@@ -1205,7 +1213,7 @@ class Talos(Knight):
                         if self.lastKey == "j":
                             self.imageMaster = self.leftImages["leftBlock"] 
                 
-                if self.scene.isKeyPressed(pygame.K_u):
+                if self.scene.isKeyPressed(pygame.K_b):
 
                     if not(self.scene.isKeyPressed(pygame.K_j) or (self.scene.isKeyPressed(pygame.K_k))):
 
@@ -1534,7 +1542,7 @@ def main(player1,player2):
 if __name__ == "__main__":
 
     #Variables for testing purposes
-    test1 = "knight"
+    test1 = "minotaur"
     test2 = "talos"
 
     main(test1,test2)
