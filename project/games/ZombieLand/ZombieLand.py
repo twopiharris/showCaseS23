@@ -435,9 +435,9 @@ class GameOverScene(simpleGE.Scene):
     def quit(self):
         pygame.quit()
         
-# def main():
-    # startMenu = StartMenu()
-    # startMenu.start()
+def main():
+    startMenu = StartMenu()
+    startMenu.start()
     
-# if __name__ == "__main__":
-    # main()
+if __name__ == "__main__":
+    main()

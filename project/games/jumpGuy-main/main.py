@@ -478,8 +478,9 @@ class Instructions(simpleGE.SuperSprite):
         return super().show()
 #endregion
 
-# def main():
-    # game = Game()
-    # game.start()
+def main():
+    game = Game()
+    game.start()
 
-# main()
+if __name__ == "__main__":
+    main()

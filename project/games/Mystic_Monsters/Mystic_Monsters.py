@@ -40,7 +40,10 @@ develop the shop
     -Currency system based on gold
     
 """
-import games.Mystic_Monsters.MMGE as MMGE
+try:
+    import games.Mystic_Monsters.MMGE as MMGE
+catch ImportError:
+    Import games.Mystic_Monsters.MMGE as MMGE
 import os,time,json
 
 class main:
@@ -246,26 +249,26 @@ def debug(self):
             keepGoing = False
         clear()
 
-# def main():
+def main():
     # #DA MAIN MENU!!
-    # intro()
-    # keepGoing = True
-    # hero = MMGE.char()
-    # mainMenu = ["Quit", "Play Game", "Load a save file"]
-    # while keepGoing:
-        # print("\n   Main Menu")
-        # sel = MMGE.menu(mainMenu)
-        # if sel == 0:
-            # keepGoing = False
-        # elif sel == 1:
-            # MMGE.play(hero)
-        # elif sel == 2:
-            # hero = MMGE.load()
-        # elif sel == 63:
-            # debug(hero)
-        # else:
-            # print("Invalid Selection")
+    intro()
+    keepGoing = True
+    hero = MMGE.char()
+    mainMenu = ["Quit", "Play Game", "Load a save file"]
+    while keepGoing:
+        print("\n   Main Menu")
+        sel = MMGE.menu(mainMenu)
+        if sel == 0:
+            keepGoing = False
+        elif sel == 1:
+            MMGE.play(hero)
+        elif sel == 2:
+            hero = MMGE.load()
+        elif sel == 63:
+            debug(hero)
+         else:
+            print("Invalid Selection")
 
 
-# if __name__ == "__main__":
-    # main()
+if __name__ == "__main__":
+    main()
