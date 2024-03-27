@@ -13,31 +13,11 @@
 ## Updating the Game for the Software
 
 1. The Arcade Machine runs without a keyboard or mouse, so any inputs that require typing, click or browsing with mouse will need replaced with inputs that are possible on the machine.
-2. The `Game.py` class requires two things.:
-    - If the game already has a `main` method it has to be commented out along with the code that triggers the main. For example the following would all need to be commented or deleted.
-    ```
-    def main():
-        game = Game()
-        game.start()
-    if __name__ == '__main__':
-        main()
-    ```
-    - The creation of a main class with a main method. It will likely look like the following:
-    ```
-    class main:
-        def __init__():
-            pass
-        
-        def main():
-            # What every code is required to start the game
-            # If the game already had a main method without a class, its content
-            # is content will likely go here.
-    ```
-    - I recommend placing this class at the top of the file right after any import statements
-3. Sometimes the game will not be able to import assets. To fix this rename the import to have the correct file path
+
+2. Sometimes the game will not be able to import assets. To fix this rename the import to have the correct file path
 
     - For example, the game `GamerGuy` will needs `Guy.png` but the game cannot find it and throws and error saying the file does not exist. To fix this when the image is loaded from path include the path relative to the project. `pygame.load.image(games\\GamerGuy\\Guy.png)` instead of `pygame.load.image(Guy.png)`
-4. If the game has multiple python files, the imports will also need to be adjusted. `GamerGuy.py` imports `Inventory.py`
+3. If the game has multiple python files, the imports will also need to be adjusted. `GamerGuy.py` imports `Inventory.py`
 ```
 # import Inventory, simpleGE, time <- the old import statement is replaced with
 

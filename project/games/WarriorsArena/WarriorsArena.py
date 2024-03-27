@@ -288,23 +288,23 @@ class UserInterface(simpleGE.Scene):
 
 
 # #Main function that declares the scene
-# def main():
+def main():
    
-    # UI = UserInterface()
-    # UI.start()
+    UI = UserInterface()
+    UI.start()
 
-    # player1 = UI.player1
-    # player2 = UI.player2
+    player1 = UI.player1
+    player2 = UI.player2
 
-    # try:
-        # gameplay = game.Game(player1,player2)
-        # gameplay.start()
+    try:
+        gameplay = game.Game(player1,player2)
+        gameplay.start()
     
-    # except:
-        # pass
+    except:
+        pass
 
 
 # #Calls the main function
-# if __name__ == "__main__":
+if __name__ == "__main__":
 
-    # main()
+    main()

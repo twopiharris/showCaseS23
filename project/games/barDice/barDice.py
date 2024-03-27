@@ -589,9 +589,9 @@ class Game (simpleGE.Scene):
             self.numPlayers = 6
             self.resetGame()
 
-# def main():
-    # game = Game()
-    # game.start()
+def main():
+    game = Game()
+    game.start()
 
-# if __name__ == "__main__":
-    # main()
+if __name__ == "__main__":
+    main()

@@ -22,11 +22,8 @@
 """
 
 import pygame, math, time
-<<<<<<< Updated upstream
-=======
 
 
->>>>>>> Stashed changes
 pygame.init()
 pygame.mixer.init()
 
@@ -248,62 +245,6 @@ class SuperSprite(pygame.sprite.Sprite):
             automatically called by update()
         """
         
-<<<<<<< Updated upstream
-        # ignore boundaries if we are hidden
-        if self.visible:
-            scrWidth = self.screen.get_width()
-            scrHeight = self.screen.get_height()
-            
-            #create variables to simplify checking
-            offRight = offLeft = offTop = offBottom = offScreen = False
-            
-            if self.x > scrWidth:
-                offRight = True
-            if self.x < 0:
-                offLeft = True
-            if self.y > scrHeight:
-                offBottom = True
-            if self.y < 0:
-                offTop = True
-                
-            if offRight or offLeft or offTop or offBottom:
-                offScreen = True
-            
-            if self.boundAction == self.WRAP:
-                if offRight:
-                    self.x = 0
-                if offLeft:
-                    self.x = scrWidth
-                if offBottom:
-                    self.y = 0
-                if offTop:
-                    self.y = scrHeight
-            
-            elif self.boundAction == self.BOUNCE:
-                if offLeft or offRight:
-                    self.dx *= -1
-                if offTop or offBottom:
-                    self.dy *= -1
-                    
-                self.updateVector()
-                #self.rotation = self.dir
-            
-            elif self.boundAction == self.STOP:
-                if offScreen:
-                    self.speed = 0
-            
-            elif self.boundAction == self.HIDE:
-                if offScreen:
-                    self.speed = 0
-                    self.setPosition((-1000, -1000))
-            
-            elif self.boundAction == self.CONTINUE:
-                pass
-                
-            else:
-                # assume it's CONTINUE - keep going forever
-                pass    
-=======
         scrWidth = self.screen.get_width()
         scrHeight = self.screen.get_height()
         
@@ -356,7 +297,6 @@ class SuperSprite(pygame.sprite.Sprite):
         else:
             # assume it's CONTINUE - keep going forever
             pass    
->>>>>>> Stashed changes
     
     def setSpeed(self, speed):
         """ immediately sets the objects speed to the 
@@ -643,20 +583,14 @@ class SuperSprite(pygame.sprite.Sprite):
 
     def hide(self):
         self.oldPosition = self.rect.center
-<<<<<<< Updated upstream
-=======
         self.oldBound = self.boundAction
         self.setBoundAction(self.HIDE)
->>>>>>> Stashed changes
         self.setPosition((-1000, -1000))
         self.visible = False
         
     def show(self):
         self.visible = True
-<<<<<<< Updated upstream
-=======
         self.setBoundAction(self.oldBound)
->>>>>>> Stashed changes
         self.setPosition(self.oldPosition)
 
 class Scene(object):

@@ -330,10 +330,10 @@ class Game(simpleGE.Scene):
                 
         super().update()
 
-# def main():
-    # game = Game()
-    # game.start()
-    # sys.exit()
+def main():
+    game = Game()
+    game.start()
+    sys.exit()
     
-# if __name__ == "__main__":
-    # main()
+if __name__ == "__main__":
+    main()

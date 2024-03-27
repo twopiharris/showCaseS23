@@ -618,13 +618,13 @@ class WinIMG(simpleGE.BasicSprite):
 
    
         
-# def main():
-    # intro = Intro()
-    # intro.start()
-    # '''
-    # game = Game()
-    # game.start()
-    # '''
+def main():
+    intro = Intro()
+    intro.start()
+    '''
+    game = Game()
+    game.start()
+    '''
     
-# if __name__ == "__main__":
-    # main()
+if __name__ == "__main__":
+    main()

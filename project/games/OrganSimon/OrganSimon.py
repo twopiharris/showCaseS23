@@ -616,13 +616,13 @@ class SimonButtons(simpleGE.SuperSprite):
         
         
 
-# def main():
-    # game = Game()
-    # game.start()
+def main():
+    game = Game()
+    game.start()
     
     
-# if __name__ == "__main__":
-    # main()
+if __name__ == "__main__":
+    main()
         
     
         

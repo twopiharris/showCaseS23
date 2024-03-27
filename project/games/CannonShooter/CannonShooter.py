@@ -429,3 +429,15 @@ class Game(simpleGE.Scene):
                 if self.currentCB >= self.NUM_CB:
                     self.currentCB = 0
                 self.CBs[self.currentCB].fire()
+                
+def main():
+   
+    game = Game()
+    game.start()
+
+
+# #Calls the main function
+if __name__ == "__main__":
+
+    main()
+

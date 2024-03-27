@@ -421,93 +421,93 @@ class List(simpleGE.BasicSprite):
         self.x = 600
         self.y = 430
         
-# def main():
-    # nodeList = []
-    # #Area 0
-    # nodeList.append(Node(
-    # "Store Front", "background-exterior-front.png",
-    # "Cash Register",[159,315,114,135], 1,
-    # "Back Alley", [580,300,114,165],2,
-    # "Offscreen",[680,520,10,10],0))
-    # #Area 1
-    # nodeList.append(Node(
-    # "Main Entrance","background-cash-register.png",
-    # "Store Front",[320,440,340,100], 0,
-    # "General Goods",[470,150,230,225],3,
-    # "Offscreen",[680,520,10,10],0))
-    # #Area 2
-    # nodeList.append(Node(
-    # "Back Alley", "background-exterior-side.png",
-    # "Store Front",[25,400,200,150], 0,
-    # "Offscreen",[680,520,10,10],0,
-    # "Offscreen",[680,520,10,10],0))
-    # #Area 3
-    # nodeList.append(Node(
-    # "General Goods","background-main-shopping-area.png",
-    # "Main Entrance",[320,440,340,100], 1,
-    # "Bulletin Board",[600,305,120,150],4,
-    # "Frozen Foods",[125,150,135,230],6))
-    # #Area 4
-    # nodeList.append(Node(
-    # "Bulletin Board","background-bulletinboard.png",
-    # "General Goods",[25,400,200,150], 3,
-    # "Locked Door",[515,235,120,225],4,
-    # "Locked Door",[515,235,120,225],4))
-    # #Area 5
-    # nodeList.append(Node(
-    # "Bulletin Board","background-bulletinboard.png",
-    # "General Goods",[25,400,200,150], 3,
-    # "Locked Door",[515,235,120,225],4,
-    # "Employee Lounge",[515,235,120,225],5))
-    # #Area 6 
-    # nodeList.append(Node(
-    # "Frozen Foods","background-frozen-section.png",
-    # "General Goods",[320,440,340,100], 3,
-    # "Office Entrance",[600,305,120,150],7,
-    # "Offscreen",[680,520,10,10],0))
-    # #Area 7
-    # nodeList.append(Node(
-    # "Office Entrance","background-office-entrance.png",
-    # "Frozen Foods",[25,400,200,150], 6,
-    # "Locked Door",[455,235,120,225],7,
-    # "Unknown Area",[455,235,120,225],12))
-    # #Area 8 - Boring Ending
-    # nodeList.append(Node(
-    # "Regular Ending Variant","background-cash-register.png",
-    # "Go Home",[320,440,340,100], 10,
-    # "Offscreen",[680,520,10,10],3,
-    # "Offscreen",[680,520,10,10],0))
-    # #Area 9 - Bad Ending
-    # nodeList.append(Node(
-    # "Regular Ending Variant","background-cash-register.png",
-    # "Go Home",[320,440,340,100],11,
-    # "Offscreen",[680,520,10,10],3,
-    # "Offscreen",[680,520,10,10],0))
-    # #Area 10 - Boring Ending Screen
-    # nodeList.append(Node(
-    # "Regular Ending Variant","background-boring-ending.png",
-    # "Offscreen",[680,520,10,10], 9,
-    # "Offscreen",[680,520,10,10],3,
-    # "Offscreen",[680,520,10,10],0))
-    # #Area 11 = Bad Ending Screen
-    # nodeList.append(Node(
-    # "Regular Ending Variant","background-bad-ending.png",
-    # "Offscreen",[680,520,10,10], 9,
-    # "Offscreen",[680,520,10,10],3,
-    # "Offscreen",[680,520,10,10],0))
-    # #Area 12 - True Ending Screen
-    # nodeList.append(Node(
-    # "Regular Ending Variant","background-true-ending.png",
-    # "Offscreen",[680,520,10,10], 9,
-    # "Offscreen",[680,520,10,10],3,
-    # "Offscreen",[680,520,10,10],0))
-    # game = Game()
-    # game.nodeList = nodeList
-    # game.LoadNode(nodeList[0])
-    # game.PlaceItems(0)
-    # game.start()
+def main():
+        nodeList = []
+        #Area 0
+        nodeList.append(Node(
+        "Store Front", "background-exterior-front.png",
+        "Cash Register",[159,315,114,135], 1,
+        "Back Alley", [580,300,114,165],2,
+        "Offscreen",[680,520,10,10],0))
+        #Area 1
+        nodeList.append(Node(
+        "Main Entrance","background-cash-register.png",
+        "Store Front",[320,440,340,100], 0,
+        "General Goods",[470,150,230,225],3,
+        "Offscreen",[680,520,10,10],0))
+        #Area 2
+        nodeList.append(Node(
+        "Back Alley", "background-exterior-side.png",
+        "Store Front",[25,400,200,150], 0,
+        "Offscreen",[680,520,10,10],0,
+        "Offscreen",[680,520,10,10],0))
+        #Area 3
+        nodeList.append(Node(
+        "General Goods","background-main-shopping-area.png",
+        "Main Entrance",[320,440,340,100], 1,
+        "Bulletin Board",[600,305,120,150],4,
+        "Frozen Foods",[125,150,135,230],6))
+        #Area 4
+        nodeList.append(Node(
+        "Bulletin Board","background-bulletinboard.png",
+        "General Goods",[25,400,200,150], 3,
+        "Locked Door",[515,235,120,225],4,
+        "Locked Door",[515,235,120,225],4))
+        #Area 5
+        nodeList.append(Node(
+        "Bulletin Board","background-bulletinboard.png",
+        "General Goods",[25,400,200,150], 3,
+        "Locked Door",[515,235,120,225],4,
+        "Employee Lounge",[515,235,120,225],5))
+        #Area 6 
+        nodeList.append(Node(
+        "Frozen Foods","background-frozen-section.png",
+        "General Goods",[320,440,340,100], 3,
+        "Office Entrance",[600,305,120,150],7,
+        "Offscreen",[680,520,10,10],0))
+        #Area 7
+        nodeList.append(Node(
+        "Office Entrance","background-office-entrance.png",
+        "Frozen Foods",[25,400,200,150], 6,
+        "Locked Door",[455,235,120,225],7,
+        "Unknown Area",[455,235,120,225],12))
+        #Area 8 - Boring Ending
+        nodeList.append(Node(
+        "Regular Ending Variant","background-cash-register.png",
+        "Go Home",[320,440,340,100], 10,
+        "Offscreen",[680,520,10,10],3,
+        "Offscreen",[680,520,10,10],0))
+        #Area 9 - Bad Ending
+        nodeList.append(Node(
+        "Regular Ending Variant","background-cash-register.png",
+        "Go Home",[320,440,340,100],11,
+        "Offscreen",[680,520,10,10],3,
+        "Offscreen",[680,520,10,10],0))
+        #Area 10 - Boring Ending Screen
+        nodeList.append(Node(
+        "Regular Ending Variant","background-boring-ending.png",
+        "Offscreen",[680,520,10,10], 9,
+        "Offscreen",[680,520,10,10],3,
+        "Offscreen",[680,520,10,10],0))
+        #Area 11 = Bad Ending Screen
+        nodeList.append(Node(
+        "Regular Ending Variant","background-bad-ending.png",
+        "Offscreen",[680,520,10,10], 9,
+        "Offscreen",[680,520,10,10],3,
+        "Offscreen",[680,520,10,10],0))
+        #Area 12 - True Ending Screen
+        nodeList.append(Node(
+        "Regular Ending Variant","background-true-ending.png",
+        "Offscreen",[680,520,10,10], 9,
+        "Offscreen",[680,520,10,10],3,
+        "Offscreen",[680,520,10,10],0))
+        game = Game()
+        game.nodeList = nodeList
+        game.LoadNode(nodeList[0])
+        game.PlaceItems(0)
+        game.start()
 
     
-# if __name__ == "__main__":
-    # main()
+if __name__ == "__main__":
+    main()
     

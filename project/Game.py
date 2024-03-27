@@ -14,5 +14,11 @@ class Game:
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
         os.chdir(self.game_directory)
-        module.main.main()
+        print(type(module.main))
+        if type(module.main) == type:
+            print("hi")
+            module.main.main()
+        else:
+            module.main()
+
         
