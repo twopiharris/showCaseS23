@@ -42,8 +42,8 @@ develop the shop
 """
 try:
     import games.Mystic_Monsters.MMGE as MMGE
-catch ImportError:
-    Import games.Mystic_Monsters.MMGE as MMGE
+except ImportError:
+    import MMGE as MMGE
 import os,time,json
 
 class main:
@@ -266,7 +266,7 @@ def main():
             hero = MMGE.load()
         elif sel == 63:
             debug(hero)
-         else:
+        else:
             print("Invalid Selection")
 
 
