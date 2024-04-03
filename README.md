@@ -9,14 +9,13 @@ In your instructions, please indicate both a key and a color for buttons, so the
 game can be played on a traditional computer as well as the cabinet.
 
     EG:  press f or red button for player1 to fire
-         press i or red button for player2 to fire
+         press h or red button for player2 to fire
 
 **Left stick** 
 
-    w - up
-    a - left
-    s - down
-    d - right
+              w - up
+    a - left     +    d - right
+              s - down
 
 **Left Buttons**  
 
@@ -26,10 +25,9 @@ game can be played on a traditional computer as well as the cabinet.
 
 **Right Stick**  
 
-    i = up
-    j = left
-    k = down
-    l = right
+              i = up
+    j = left    +    l = right
+             k = down
 
 **Right Buttons**  
 
