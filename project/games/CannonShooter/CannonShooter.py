@@ -217,7 +217,7 @@ class Game(simpleGE.Scene):
         self.disWallHealth = simpleGE.Label()
         self.disWallHealth.text = "Health: 100"
         self.disWallHealth.center = 999,999
-        self.wallHealth = 10000
+        self.wallHealth = 200
         
         self.disWave = simpleGE.Label()
         self.disWave.text = "Wave: 1"
