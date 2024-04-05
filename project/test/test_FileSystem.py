@@ -30,7 +30,7 @@ class TestFileSystem(unittest.TestCase):
     
     def test_get_ExampleGameMain(self):
         files = FileSystem('test_games')
-        self.assertEqual(str(files.get_game('ExampleGame').game_main), 'test_games/ExampleGame/main.py')
+        self.assertEqual(files.get_game('ExampleGame').game_main, Path('test_games/ExampleGame/main.py'))
 
     def test_get_ExampleGameDir(self):
         files = FileSystem('test_games')
@@ -39,10 +39,8 @@ class TestFileSystem(unittest.TestCase):
     def test_read_directories(self):
         files = FileSystem('test_games')
         directories = files.read_directories('test_games')
-        directories_as_string = []
-        for directory in directories:
-            directories_as_string.append(str(directory))
-        self.assertEqual(directories_as_string, ['test_games/PandoraPong','test_games/ExampleGame', 'test_games/PandoraPong2'])
+
+        self.assertEqual(directories.sort(), [Path('test_games/PandoraPong'),Path('test_games/ExampleGame'), Path('test_games/PandoraPong2')].sort())
 
     def test_make_ExampleGameName(self):
         files = FileSystem('test_games')
@@ -54,15 +52,15 @@ class TestFileSystem(unittest.TestCase):
     
     def test_get_ExampleGameMain(self):
         files = FileSystem('test_games')
-        self.assertEqual(str(files.make_game(Path('test_games/ExampleGame')).game_main), 'test_games/ExampleGame/main.py')
+        self.assertEqual(files.make_game(Path('test_games/ExampleGame')).game_main, Path('test_games/ExampleGame/main.py'))
 
     def test_get_ExampleGameDir(self):
         files = FileSystem('test_games')
-        self.assertEqual(str(files.make_game(Path('test_games/ExampleGame')).game_directory), 'test_games/ExampleGame')
+        self.assertEqual(files.make_game(Path('test_games/ExampleGame')).game_directory, Path('test_games/ExampleGame'))
 
     def test_get_game_names(self):
         files = FileSystem('test_games')
-        self.assertEqual(files.get_game_names(), ['PandoraPong','ExampleGame', 'PandoraPong2'])
+        self.assertEqual(files.get_game_names().sort(), ['PandoraPong','ExampleGame', 'PandoraPong2'].sort())
     
     def test_set_games(self):
         files = FileSystem('test_games')
@@ -70,7 +68,7 @@ class TestFileSystem(unittest.TestCase):
         games_paths = []
         for game in games:
             games_paths.append(game.game_main)
-        self.assertEqual(games_paths, [Path('test_games/ExampleGame/main.py'), Path('test_games/PandoraPong/main.py')])
+        self.assertEqual(games_paths.sort(), [Path('test_games/ExampleGame/main.py'), Path('test_games/PandoraPong/main.py')].sort())
     
     def test_get_games(self):
         files = FileSystem('test_games')
@@ -78,7 +76,7 @@ class TestFileSystem(unittest.TestCase):
         games_paths = []
         for game in games:
             games_paths.append(game.game_directory)
-        self.assertEqual(games_paths, [Path('test_games/PandoraPong'), Path('test_games/ExampleGame'), Path('test_games/PandoraPong2')])
+        self.assertEqual(games_paths.sort(), [Path('test_games/PandoraPong'), Path('test_games/ExampleGame'), Path('test_games/PandoraPong2')].sort())
         
     def test_read_directories_type(self):
         files = FileSystem('test_games')
