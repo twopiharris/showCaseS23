@@ -217,7 +217,7 @@ class Game(simpleGE.Scene):
         self.disWallHealth = simpleGE.Label()
         self.disWallHealth.text = "Health: 100"
         self.disWallHealth.center = 999,999
-        self.wallHealth = 200
+        self.wallHealth = 10000
         
         self.disWave = simpleGE.Label()
         self.disWave.text = "Wave: 1"
@@ -269,22 +269,22 @@ class Game(simpleGE.Scene):
         self.disBossHealth.text = f"Boss Health: {self.boss.health}"
         
         if self.money >= 10:
-            if self.upgrade1.clicked == True:
+            if self.upgrade1.clicked == True or pygame.key.get_pressed()[pygame.K_f]:
                 self.money -=10
                 self.upgrade1.hide()
                 self.upgrade2.show((320,450))
         if self.money >= 20:
-            if self.upgrade2.clicked == True:
+            if self.upgrade2.clicked == True or pygame.key.get_pressed()[pygame.K_f]:
                 self.money -=20
                 self.upgrade2.hide()
                 self.upgrade3.show((320,450))
         if self.money >= 30:
-            if self.upgrade3.clicked == True:
+            if self.upgrade3.clicked == True or pygame.key.get_pressed()[pygame.K_f]:
                 self.money -=30
                 self.upgrade3.hide()
                 self.upgrade4.show((320,450))
         if self.money >= 40:
-            if self.upgrade4.clicked == True:
+            if self.upgrade4.clicked == True or pygame.key.get_pressed()[pygame.K_f]:
                 self.money -=40
                 self.upgrade4.hide()
                 self.maxDmg.show((320,450))
@@ -394,8 +394,8 @@ class Game(simpleGE.Scene):
                     self.background = pygame.image.load("WinningScreen.png")
                     self.screen.blit(self.background, (0, 0))
                     self.quit.show((300,200))
-                    self.restart.show((300,300))
                     self.boss.hide()
+                    self.restart.show((300,300))
                     for sprite in self.mainSprites:
                         sprite.x = 999
                         sprite.y = 999
@@ -424,7 +424,15 @@ class Game(simpleGE.Scene):
         
     def doEvents(self, event):
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
+            # added code to press buttons with keys
+            if self.begin.clicked is False and self.waveNum == 0:
+                self.begin.clicked = True
+            if self.restart.clicked is False and self.boss.health <= 0 and self.waveNum == 8:
+                self.restart.clicked = True
+            if self.quit.clicked == False and event.key == pygame.K_SLASH:
+                self.quit.clicked = True
+            #end of added code
+            if event.key == pygame.K_SPACE or event.key == pygame.K_z:
                 self.currentCB += 1
                 if self.currentCB >= self.NUM_CB:
                     self.currentCB = 0
