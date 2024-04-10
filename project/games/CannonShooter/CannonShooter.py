@@ -169,9 +169,9 @@ class Begin(simpleGE.Button):
     
     def __init__(self, scene):
         super().__init__()
-        
+        self.oldPosition = (340,400)
         self.text = "Start"
-        self.show((340,400))
+        self.show()
         
 class UpgradeDmg(simpleGE.Button):
     
@@ -255,7 +255,8 @@ class Game(simpleGE.Scene):
             self.disMoney.center = 60,450
             self.disWallHealth.center = 320,300
             self.disWave.center = 580,450
-            self.upgrade1.show((320,450))
+            self.upgrade1.oldPosition = (320,450)
+            self.upgrade1.show()
             self.cannon.setPosition((320, 380))
             self.wall.setPosition((320,300))
             for enemies in self.enemies[:5]:
@@ -268,30 +269,35 @@ class Game(simpleGE.Scene):
         self.disWave.text = f"Wave: {self.waveNum}"
         self.disBossHealth.text = f"Boss Health: {self.boss.health}"
         
-        if self.money >= 10 and self.upgrade1.center == (320,450):
+        if self.money >= 10 and self.upgrade1.oldPosition == (320,450):
             if self.upgrade1.clicked == True or pygame.key.get_pressed()[pygame.K_f]:
                 self.money -=10
                 self.upgrade1.hide()
-                self.upgrade2.show((320,450))
-        if self.money >= 20 and self.upgrade2.center == (320,450):
+                self.upgrade2.oldPosition = (320,450)
+                self.upgrade2.show()
+        if self.money >= 20 and self.upgrade2.oldPosition == (320,450):
             if self.upgrade2.clicked == True or pygame.key.get_pressed()[pygame.K_f]:
                 self.money -=20
                 self.upgrade2.hide()
-                self.upgrade3.show((320,450))
-        if self.money >= 30 and self.upgrade3.center == (320,450):
+                self.upgrade3.oldPosition = (320,450)
+                self.upgrade3.show()
+        if self.money >= 30 and self.upgrade3.oldPosition == (320,450):
             if self.upgrade3.clicked == True or pygame.key.get_pressed()[pygame.K_f]:
                 self.money -=30
                 self.upgrade3.hide()
-                self.upgrade4.show((320,450))
-        if self.money >= 40 and self.upgrade4.center == (320,450):
+                self.upgrade4.oldPosition = (320,450)
+                self.upgrade4.show()
+        if self.money >= 40 and self.upgrade4.oldPosition == (320,450):
             if self.upgrade4.clicked == True or pygame.key.get_pressed()[pygame.K_f]:
                 self.money -=40
                 self.upgrade4.hide()
-                self.maxDmg.show((320,450))
+                self.maxDmg.oldPosition = (320,450)
+                self.maxDmg.show()
         
         if self.wallHealth <= 0:
             self.background = pygame.image.load("LosingScreen.png")
             self.screen.blit(self.background, (0, 0))
+            self.quit.oldPosition = (300,200)
             self.quit.show((300,200))
             self.boss.hide()
             for sprite in self.mainSprites:
