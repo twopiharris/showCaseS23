@@ -1,5 +1,8 @@
 import simpleGE,pygame,time
-import games.WarriorsArena.game as game
+try:
+    import games.WarriorsArena.game as game
+except:
+    import game
 """
 User interface for the start screen. This allows you to 
 select your character's then start the game. All citing for
