@@ -268,22 +268,22 @@ class Game(simpleGE.Scene):
         self.disWave.text = f"Wave: {self.waveNum}"
         self.disBossHealth.text = f"Boss Health: {self.boss.health}"
         
-        if self.money >= 10:
+        if self.money >= 10 and self.upgrade1.center == (320,450):
             if self.upgrade1.clicked == True or pygame.key.get_pressed()[pygame.K_f]:
                 self.money -=10
                 self.upgrade1.hide()
                 self.upgrade2.show((320,450))
-        if self.money >= 20:
+        if self.money >= 20 and self.upgrade2.center == (320,450):
             if self.upgrade2.clicked == True or pygame.key.get_pressed()[pygame.K_f]:
                 self.money -=20
                 self.upgrade2.hide()
                 self.upgrade3.show((320,450))
-        if self.money >= 30:
+        if self.money >= 30 and self.upgrade3.center == (320,450):
             if self.upgrade3.clicked == True or pygame.key.get_pressed()[pygame.K_f]:
                 self.money -=30
                 self.upgrade3.hide()
                 self.upgrade4.show((320,450))
-        if self.money >= 40:
+        if self.money >= 40 and self.upgrade4.center == (320,450):
             if self.upgrade4.clicked == True or pygame.key.get_pressed()[pygame.K_f]:
                 self.money -=40
                 self.upgrade4.hide()
